@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
@@ -10,6 +10,8 @@ namespace Example
 
     public static class Program
     {
+        public static readonly CloudStorageAccount CloudStorageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("Conn"));
+
         public static void Main()
         {
             var table = Prepare();
@@ -51,11 +53,10 @@ namespace Example
         static CloudTable Prepare()
         {
             var table = CloudStorageAccount
-                .DevelopmentStorageAccount
                 .CreateCloudTableClient()
-                .GetTableReference("Example");
+                .GetTableReference("Example" + Environment.TickCount);
 
-            table.DeleteIfExists();
+            //table.DeleteIfExists();
             table.CreateIfNotExists();
 
             return table;

@@ -8,8 +8,8 @@ namespace Example.Scenarios
     {
         readonly CloudStorageAccount[] pool =              
         {
-            CloudStorageAccount.DevelopmentStorageAccount,
-            CloudStorageAccount.DevelopmentStorageAccount // pretend this is some other account
+            Program.CloudStorageAccount,
+            Program.CloudStorageAccount // pretend this is some other account
         };
 
         public override void Run()
